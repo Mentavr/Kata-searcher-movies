@@ -1,11 +1,21 @@
-import { clientAxios } from "../../config/apiConfig"
-import { GetMoviesParams } from "./types"
+import { clientAxios } from '../../config/apiConfig';
+import { useContextState } from '../../utils/hooks/useContextState';
+import { GetMoviesParams } from './types';
 
 export const apiSearcher = () => {
-    const getMovies = async ({query}: GetMoviesParams) => {
-        const response = await clientAxios(`/3/search/movie?query=${query}`);
-        return response.data;
+  const { setLoaded } = useContextState();
+  const getMovies = async ({ query, page }: GetMoviesParams) => {
+    console.log('тут');
+    setLoaded(true);
+    try {
+      const response = await clientAxios(`/3/search/movie?query=${query}&page=${page}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    } finally {
+      setLoaded(false);
     }
+  };
 
-    return { getMovies };
-}
+  return { getMovies };
+};
