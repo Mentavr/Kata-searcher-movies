@@ -18,7 +18,6 @@ export const Switcher = ({ pageName, setPage }: SwitcherProps) => {
       const data = await getRatedMovies(page);
       setStateRatedMovies(data);
     } catch (e) {
-      console.log(e);
       setEmptyMovies(true);
       throw new Error('Ошибка гостевого id');
     }

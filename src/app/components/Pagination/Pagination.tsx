@@ -23,7 +23,6 @@ export const PagePagination = ({ pageName }: PagePaginationProps) => {
       const data = await getRatedMovies(page);
       setStateRatedMovies(data);
     } catch (e) {
-      console.log(e);
       throw new Error('Ошибка гостевого id');
     }
   };

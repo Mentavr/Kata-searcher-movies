@@ -6,6 +6,7 @@ import { Footer } from '../Footer/Footer';
 import { apiGuestSession } from '../../../api/guest-session/apiGuestSession';
 import Cookies from 'js-cookie';
 import { PAGE } from '../../../constant/constant';
+import { toast } from 'react-toastify';
 
 export const Layout = () => {
   const [page, setPage] = useState<'search' | 'rated'>(PAGE.SEARCH);
@@ -17,6 +18,7 @@ export const Layout = () => {
       const data = await createGuestSession();
       Cookies.set('guestSessionId', `${data.guest_session_id}`, { expires: new Date(data.expires_at) });
     } catch (e) {
+      toast.error('Проверте соединениее с интернетом');
       throw new Error('Ошибка гостевого id');
     }
   };

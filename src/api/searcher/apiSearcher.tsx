@@ -5,7 +5,6 @@ import { GetMoviesParams } from './types';
 export const apiSearcher = () => {
   const { setLoaded } = useContextState();
   const getMovies = async ({ query, page }: GetMoviesParams) => {
-    console.log('тут');
     setLoaded(true);
     try {
       const response = await clientAxios(`/3/search/movie?query=${query}&page=${page}`);

@@ -8,7 +8,6 @@ interface RatedPageProps {
 export const RatedPage = ({ pageName }: RatedPageProps) => {
   const { getMoviesRatedInfo } = useContextRatedState();
   const info = getMoviesRatedInfo();
-  console.log('info RatedPage', info);
 
   return (
     <section className="">
