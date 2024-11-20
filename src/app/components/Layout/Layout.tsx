@@ -26,6 +26,8 @@ export const Layout = () => {
   useEffect(() => {
     const cookie = Cookies.get('guestSessionId');
     if (!cookie) {
+      localStorage.clear();
+      localStorage.setItem('ratings', JSON.stringify([]));
       fetchCreateGuestId();
     }
   }, []);

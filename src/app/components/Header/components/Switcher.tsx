@@ -25,10 +25,18 @@ export const Switcher = ({ pageName, setPage }: SwitcherProps) => {
 
   const handlerSwitch = () => {
     setEmptyMovies(false);
-    pageName === PAGE.SEARCH ? setPage('rated') : setPage(PAGE.SEARCH);
-    pageName === PAGE.SEARCH && fetchRatedMovies(pageRatedState);
-    setPageRatedState(1);
-    setPageContextState(1);
+
+    if (pageName === PAGE.SEARCH) {
+      setPageRatedState(1);
+      setPage(PAGE.RATED);
+      fetchRatedMovies(pageRatedState);
+    }
+
+    if (pageName === PAGE.RATED) {
+      setPage(PAGE.SEARCH);
+      setPageContextState(1);
+    }
+
     setStateMovies([]);
   };
 

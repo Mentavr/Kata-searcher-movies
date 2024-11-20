@@ -22,10 +22,15 @@ export const Searcher = () => {
   const fetchMovies = async (value: string, page: number) => {
     try {
       const movies = await getMovies({ query: value, page: page });
-      movies.results.length > 0 ? setEmptyMovies(false) : setEmptyMovies(true);
+      movies.results.length === 0 ? setEmptyMovies(true) : setEmptyMovies(false);
       setStateMovies(movies.results);
     } catch (e) {
       toast.error('Проверте соединениее с интернетом');
+    } finally {
+      if (value.length === 0) {
+        setPage(1);
+        setEmptyMovies(false);
+      }
     }
   };
 
@@ -33,9 +38,6 @@ export const Searcher = () => {
 
   const handleChange = (value: string) => {
     setValue('movie', value);
-    if (value.length === 0) {
-      setPage(1);
-    }
     debounced(value);
   };
 

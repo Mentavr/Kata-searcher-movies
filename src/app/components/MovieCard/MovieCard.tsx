@@ -36,10 +36,10 @@ export const MovieCard = ({ title, poster, date, description, rating, genres, id
             src={urlImg}
             alt="Poster"
           />
-          <div>
+          <div className="w-full">
             <div className="flex justify-between lx:gap-[10px]">
               <h3 className="text-wrap text-[20px] leading-1">{title}</h3>
-              <Rating rating={pageName === PAGE.RATED ? rating : vote} />
+              <Rating rating={pageName === PAGE.RATED ? rating : vote} id={id} />
             </div>
             <span className="text-[12px] leading-5 text-[#827e7e] mb-[7px] inline-block">{format}</span>
             <Genres genres={genres} />

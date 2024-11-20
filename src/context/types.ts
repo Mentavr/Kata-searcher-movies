@@ -10,7 +10,11 @@ export interface StateValueType {
   allGenres: ResponceGenres[];
   isEmptyMovies: boolean;
   setEmptyMovies: (e: boolean) => void;
+  ratingMoviesUser: IRatingMoviesUser;
+  setRatingMoviesUser: (e: IRatingMoviesUser) => void;
 }
+
+export type IRatingMoviesUser = { id: number; rating: number };
 
 export interface StateRatedValueType {
   getMoviesRatedInfo: () => StateMoviesInfo[];

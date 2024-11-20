@@ -1,8 +1,9 @@
 import { useState, type ReactNode, useEffect } from 'react';
 import { StateContext } from './StateContext';
-import { StateMoviesInfo, StateValueType } from './types';
+import { IRatingMoviesUser, StateMoviesInfo, StateValueType } from './types';
 import { apiMovieList } from '../api/movie-list/apiMovieList';
 import { ResponceGenres } from '../api/movie-list/types';
+import { addNewRating } from '../utils/helpers/addNewRating';
 
 interface IStateProvider {
   children: ReactNode;
@@ -16,9 +17,13 @@ export const StateProvider = ({ children }: IStateProvider) => {
   const [page, setPage] = useState<number>(1);
   const [allGenres, setAllGenres] = useState<ResponceGenres[]>([] as ResponceGenres[]);
   const [isEmptyMovies, setEmptyMovies] = useState<boolean>(false);
+  const [ratingMoviesUser, setRatingMoviesUser] = useState<IRatingMoviesUser>({} as IRatingMoviesUser);
 
   const getMoviesInfo = () => {
-    return movies;
+    const moviesChangeRating = movies.map((movie) => {
+      return addNewRating(movie);
+    });
+    return moviesChangeRating;
   };
 
   const setStateMovies = (date: StateMoviesInfo[]) => {
@@ -35,6 +40,8 @@ export const StateProvider = ({ children }: IStateProvider) => {
     allGenres,
     isEmptyMovies,
     setEmptyMovies,
+    ratingMoviesUser,
+    setRatingMoviesUser,
   };
 
   const fetchGetGenres = async () => {
