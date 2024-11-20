@@ -29,7 +29,7 @@ interface StarsProps extends IStars {
 
 export const Stars = ({ rating, id, pageName }: StarsProps) => {
   const [initialRating, setInitialRating] = useState<number>(0);
-  const { ratingMoviesUser, setRatingMoviesUser } = useContextState();
+  const { setRatingMoviesUser } = useContextState();
 
   const { addRatingMovies } = apiMovieList();
 
