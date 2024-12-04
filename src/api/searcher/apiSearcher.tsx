@@ -7,7 +7,12 @@ export const apiSearcher = () => {
   const getMovies = async ({ query, page }: GetMoviesParams) => {
     setLoaded(true);
     try {
-      const response = await clientAxios(`/3/search/movie?query=${query}&page=${page}`);
+      const response = await clientAxios(`/3/search/movie`, {
+        params: {
+          query: query,
+          page: page,
+        }
+      });
       return response.data;
     } catch (error) {
       throw error;

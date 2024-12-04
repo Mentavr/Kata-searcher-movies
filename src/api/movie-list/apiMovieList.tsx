@@ -18,11 +18,14 @@ export const apiMovieList = () => {
 
   const addRatingMovies = async ({ id, rating }: RatingMoviesType) => {
     try {
-      const response = await clientAxios(`/3/movie/${id}/rating?guest_session_id=${guestSessionId}`, {
+      const response = await clientAxios(`/3/movie/${id}/rating`, {
         method: 'post',
         data: {
           value: rating,
         },
+        params: {
+          guest_session_id: guestSessionId
+        }
       });
       return response.data;
     } catch (error) {
@@ -33,7 +36,11 @@ export const apiMovieList = () => {
   const getRatedMovies = async (page: number) => {
     setLoaded(true);
     try {
-      const response = await clientAxios(`/3/guest_session/${guestSessionId}/rated/movies?page=${page}`);
+      const response = await clientAxios(`/3/guest_session/${guestSessionId}/rated/movies`,{
+        params: {
+          page: page,
+        }
+      });
       return response.data.results;
     } catch (error) {
       throw error;
